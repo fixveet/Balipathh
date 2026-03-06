@@ -1530,13 +1530,13 @@
           ],
         },
         rentals: {
-          label: "Villa",
+          label: "rental",
           plural: "Rentals",
           storageKey: "bali_rentals",
           statusOptions: ["active", "draft", "paused"],
           priceLabel: "per night",
           fields: [
-            { id: "name", label: "Villa Name", req: true, type: "text", placeholder: "e.g. Jungle Pool Villa Ubud", col: 1 },
+            { id: "name", label: "Rentals Name", req: true, type: "text", placeholder: "tipe kendaraan", col: 1 },
             { id: "location", label: "Location", req: true, type: "text", placeholder: "e.g. Ubud, Bali", col: 2 },
             { id: "tipe", label: "tipe", req: false, type: "text", placeholder: "e.g. Motor", col: 1 },
             { id: "price", label: "Price", req: true, type: "number", placeholder: "350", prefix: "$", col: 2 },
@@ -1814,7 +1814,7 @@
           document.getElementById("rentalStats").innerHTML = `
       <div class="stat-card">
         <div class="stat-top"><div class="stat-icon green"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div><span class="stat-badge up">+8%</span></div>
-        <div class="stat-lbl">Total Villas</div><div class="stat-val">${items.length}</div>
+        <div class="stat-lbl">Total rentals</div><div class="stat-val">${items.length}</div>
       </div>
       <div class="stat-card">
         <div class="stat-top"><div class="stat-icon blue"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div><span class="stat-badge up">+3.2%</span></div>
