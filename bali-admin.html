@@ -1858,7 +1858,7 @@
         const slice = fil.slice((pg - 1) * PAGE_SZ, pg * PAGE_SZ);
 
         // subtitle field
-        const subField = sec === "packages" ? "duration" : sec === "rentals" ? "bedrooms" : sec === "souvenirs" ? "category" : null;
+        const subField = sec === "packages" ? "duration" : sec === "rentals" ? "tipe" : sec === "souvenirs" ? "category" : null;
 
         const rows =
           slice.length === 0
