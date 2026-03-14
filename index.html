@@ -31,7 +31,6 @@
       overflow-x: hidden;
     }
 
-    /* ── SCROLL PROGRESS BAR ── */
     #progress-bar {
       position: fixed; top: 0; left: 0; height: 3px;
       background: linear-gradient(90deg, var(--green), var(--green-bright));
@@ -122,7 +121,7 @@
     .hamburger {
       display: none; flex-direction: column; gap: 5px;
       cursor: pointer; background: none; border: none; padding: 6px;
-      z-index: 1001;
+      z-index: 1001; flex-shrink: 0;
     }
     .hamburger span {
       display: block; width: 24px; height: 2px;
@@ -139,7 +138,7 @@
       position: fixed; inset: 0; top: 70px;
       background: var(--white); z-index: 999;
       display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 34px;
+      align-items: center; justify-content: center; gap: 30px;
       clip-path: circle(0% at calc(100% - 44px) -10px);
       transition: clip-path 0.6s cubic-bezier(0.4,0,0.2,1);
       pointer-events: none;
@@ -178,8 +177,6 @@
       position: relative; border-radius: 28px; overflow: hidden;
       height: 560px;
     }
-    @media (max-width: 768px) { .hero-card { height: 460px; } }
-    @media (max-width: 480px) { .hero-card { height: 380px; border-radius: 20px; } }
 
     .hero-bg {
       position: absolute; inset: -30px;
@@ -203,7 +200,6 @@
       height: 100%; text-align: center; padding: 28px;
       padding-bottom: 100px;
     }
-    @media (max-width: 480px) { .hero-content { padding-bottom: 80px; } }
 
     .badge {
       background: rgba(61,214,107,0.15);
@@ -258,7 +254,6 @@
     }
     .btn-ghost:hover { background: rgba(255,255,255,0.22); transform: translateY(-2px); }
 
-    /* Stats strip */
     .hero-stats {
       position: absolute; bottom: 24px; left: 24px; right: 24px;
       display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
@@ -283,7 +278,6 @@
       padding: 54px 22px;
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
     }
-    @media (max-width: 820px) { .features { grid-template-columns: 1fr; } }
 
     .feature-card {
       background: var(--white);
@@ -297,7 +291,6 @@
     .feature-card.visible { opacity: 1; transform: translateY(0); }
     .feature-card:nth-child(2).visible { transition-delay: 0.1s; }
     .feature-card:nth-child(3).visible { transition-delay: 0.2s; }
-
     .feature-card::before {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(135deg, rgba(61,214,107,0.07) 0%, transparent 55%);
@@ -318,10 +311,8 @@
     }
     .feature-card:hover .feature-icon { background: var(--green-pale); transform: rotate(-6deg) scale(1.1); }
     .feature-icon svg { width: 24px; height: 24px; stroke: var(--green); fill: none; stroke-width: 1.8; }
-
     .feature-card h3 { font-size: 1.08rem; font-weight: 600; margin-bottom: 10px; }
     .feature-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.7; margin-bottom: 22px; }
-
     .link-green {
       font-size: 0.84rem; font-weight: 600; color: var(--green);
       text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
@@ -355,9 +346,8 @@
     .packages-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
     }
-    @media (max-width: 920px) { .packages-grid { grid-template-columns: 1fr 1fr; } }
-    @media (max-width: 560px)  { .packages-grid { grid-template-columns: 1fr; } }
 
+    /* ── PKG CARD (matches package.html style) ── */
     .pkg-card {
       background: var(--white);
       border: 1.5px solid rgba(0,0,0,0.06);
@@ -369,7 +359,6 @@
     .pkg-card.visible { opacity: 1; transform: translateY(0); }
     .pkg-card:nth-child(2).visible { transition-delay: 0.12s; }
     .pkg-card:nth-child(3).visible { transition-delay: 0.24s; }
-
     .pkg-card:hover {
       transform: translateY(-10px) !important;
       box-shadow: 0 22px 60px rgba(0,0,0,0.12);
@@ -382,7 +371,6 @@
       transition: transform 0.65s cubic-bezier(0.4,0,0.2,1);
     }
     .pkg-card:hover .pkg-img img { transform: scale(1.09); }
-
     .pkg-img::after {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(to bottom, transparent 45%, rgba(0,0,0,0.3) 100%);
@@ -390,33 +378,53 @@
     }
     .pkg-card:hover .pkg-img::after { opacity: 1; }
 
-    .best-seller {
+    /* badges */
+    .pkg-badge {
       position: absolute; top: 14px; left: 14px; z-index: 1;
-      background: var(--dark); color: var(--white);
-      font-size: 0.68rem; font-weight: 600;
-      padding: 6px 14px; border-radius: 50px; letter-spacing: 0.06em;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 5px 12px; border-radius: 50px;
     }
+    .badge-recommended { background: var(--green-bright); color: var(--dark); }
+    .badge-popular     { background: var(--dark); color: var(--white); }
 
-    .pkg-body { padding: 24px; }
-
-    .pkg-top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 8px;
+    .wishlist-btn {
+      position: absolute; top: 12px; right: 12px; z-index: 1;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,0.85); backdrop-filter: blur(8px);
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.25s, background 0.22s;
     }
-    .pkg-body h3 { font-size: 1.05rem; font-weight: 600; line-height: 1.3; }
+    .wishlist-btn:hover { transform: scale(1.12); background: var(--white); }
+    .wishlist-btn svg { width: 16px; height: 16px; stroke: var(--text); fill: none; stroke-width: 2; transition: stroke 0.2s, fill 0.2s; }
+    .wishlist-btn.liked svg { stroke: #e74c3c; fill: #e74c3c; }
 
-    .rating {
-      display: flex; align-items: center; gap: 4px;
-      font-size: 0.82rem; font-weight: 600; color: var(--green);
-      white-space: nowrap; margin-left: 10px;
+    .pkg-body { padding: 22px 24px 24px; }
+    .pkg-meta {
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;
     }
-    .rating svg { width: 13px; height: 13px; fill: var(--green-bright); flex-shrink: 0; }
+    .pkg-location {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.75rem; font-weight: 600; color: var(--green);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .pkg-location svg { width: 11px; height: 11px; fill: var(--green-bright); flex-shrink: 0; }
+    .pkg-duration {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.75rem; color: var(--muted);
+    }
+    .pkg-duration svg { width: 12px; height: 12px; stroke: var(--muted); fill: none; stroke-width: 2; flex-shrink: 0; }
 
-    .pkg-loc {
-      font-size: 0.79rem; color: var(--muted);
-      display: flex; align-items: center; gap: 4px; margin-bottom: 20px;
+    .pkg-body h3 {
+      font-size: 1.05rem; font-weight: 600; line-height: 1.3; margin-bottom: 6px;
     }
-    .pkg-loc svg { width: 12px; height: 12px; stroke: var(--muted); fill: none; flex-shrink: 0; }
+    .pkg-body h3 a { color: inherit; text-decoration: none; }
+    .pkg-body h3 a:hover { color: var(--green); }
+
+    .pkg-body p {
+      font-size: 0.82rem; color: var(--muted); line-height: 1.65; margin-bottom: 18px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
 
     .pkg-footer {
       display: flex; justify-content: space-between; align-items: center;
@@ -433,10 +441,23 @@
       border: none; border-radius: 50%; cursor: pointer;
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
       transition: background 0.25s, transform 0.3s;
+      text-decoration: none;
     }
     .btn-circle:hover { background: var(--green-bright); transform: scale(1.14) rotate(6deg); }
     .btn-circle svg { width: 16px; height: 16px; stroke: var(--text); fill: none; stroke-width: 2; }
     .btn-circle:hover svg { stroke: var(--dark); }
+
+    /* skeleton loading state */
+    .pkg-skeleton {
+      background: var(--white); border: 1.5px solid rgba(0,0,0,0.06);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .skel-img { height: 230px; background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+    .skel-body { padding: 22px 24px; }
+    .skel-line { height: 12px; border-radius: 6px; background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; margin-bottom: 10px; }
+    .skel-line.short { width: 60%; }
+    .skel-line.medium { width: 80%; }
+    @keyframes shimmer { to { background-position: -200% 0; } }
 
     /* ── FOOTER ── */
     footer {
@@ -449,8 +470,6 @@
       max-width: 1220px; margin: 0 auto;
       display: grid; grid-template-columns: 1.7fr 1fr 1fr 1.5fr; gap: 46px;
     }
-    @media (max-width: 920px) { .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; } }
-    @media (max-width: 540px)  { .footer-inner { grid-template-columns: 1fr; gap: 28px; } }
 
     .footer-brand .logo { color: var(--white); margin-bottom: 18px; display: inline-flex; }
     .footer-brand p { font-size: 0.84rem; line-height: 1.75; max-width: 230px; margin-bottom: 24px; }
@@ -466,10 +485,7 @@
     .social-btn:hover { background: var(--green-mid); transform: translateY(-3px); }
     .social-btn svg { width: 16px; height: 16px; stroke: rgba(255,255,255,0.65); fill: none; }
 
-    .footer-col h4 {
-      color: var(--white); font-size: 0.86rem; font-weight: 600;
-      margin-bottom: 20px; letter-spacing: 0.04em;
-    }
+    .footer-col h4 { color: var(--white); font-size: 0.86rem; font-weight: 600; margin-bottom: 20px; letter-spacing: 0.04em; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 13px; }
     .footer-col a {
       color: rgba(255,255,255,0.52); text-decoration: none;
@@ -510,13 +526,11 @@
       font-size: 0.78rem; color: rgba(255,255,255,0.28);
     }
 
-    /* ── KEYFRAMES ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(26px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ── TOAST ── */
     .toast {
       position: fixed; bottom: 28px; left: 50%;
       transform: translateX(-50%) translateY(80px);
@@ -530,7 +544,6 @@
     }
     .toast.show { transform: translateX(-50%) translateY(0); }
 
-    /* ── CUSTOM CURSOR ── */
     .cursor-dot {
       position: fixed; pointer-events: none; z-index: 9999;
       width: 7px; height: 7px; background: var(--green-bright);
@@ -544,7 +557,36 @@
       border-radius: 50%; transform: translate(-50%, -50%);
       transition: width 0.28s, height 0.28s, border-color 0.28s;
     }
-    @media (hover: none), (max-width: 900px) { .cursor-dot, .cursor-ring { display: none; } }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width: 900px) {
+      .nav-links, .search-box, .avatar { display: none !important; }
+      .hamburger { display: flex !important; }
+      .cursor-dot, .cursor-ring { display: none; }
+    }
+    @media (max-width: 820px) {
+      .features { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .hero-card { height: 460px; }
+      .hero-content { padding-bottom: 80px; }
+      .packages-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+      .pkg-card:hover { transform: none !important; box-shadow: 0 4px 24px rgba(0,0,0,0.08) !important; }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; }
+      .footer-brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 560px) {
+      .hero-card { height: 380px; border-radius: 20px; }
+      .hero-content { padding-bottom: 70px; }
+      .hero-wrap { padding: calc(70px + 14px) 14px 0; }
+      .packages-section { padding: 0 14px 60px; }
+      .features { padding: 36px 14px; gap: 14px; }
+      .packages-grid { grid-template-columns: 1fr; }
+      .stat-pill { padding: 8px 14px; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; }
+      .newsletter-form button { border-radius: 50px; }
+    }
   </style>
 </head>
 <body>
@@ -556,7 +598,7 @@
 <!-- ── NAV ── -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#" class="logo">
+    <a href="index.html" class="logo">
       <div class="logo-icon">
         <svg viewBox="0 0 24 24"><path d="M12 2C6 8 4 12 12 22C20 12 18 8 12 2Z"/></svg>
       </div>
@@ -564,11 +606,10 @@
     </a>
 
     <ul class="nav-links" id="navLinks">
-      <li><a href="#">Home</a></li>
+      <li><a href="index.html" class="active">Home</a></li>
       <li><a href="package.html">Packages</a></li>
       <li><a href="rental.html">Rentals</a></li>
-      <li><a href="#">Souvenirs</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="souvenir.html">Souvenirs</a></li>
     </ul>
 
     <div class="nav-right">
@@ -589,11 +630,10 @@
 
 <!-- ── MOBILE MENU ── -->
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#" onclick="closeMobileMenu()">Destinations</a>
-  <a href="#packages" onclick="closeMobileMenu()">Packages</a>
-  <a href="#" onclick="closeMobileMenu()">Rentals</a>
+  <a href="index.html" onclick="closeMobileMenu()">Home</a>
+  <a href="package.html" onclick="closeMobileMenu()">Packages</a>
+  <a href="rental.html" onclick="closeMobileMenu()">Rentals</a>
   <a href="#" onclick="closeMobileMenu()">Souvenirs</a>
-  <a href="#" onclick="closeMobileMenu()">About</a>
   <button class="btn-book" onclick="showToast('Booking page coming soon! 🌴'); closeMobileMenu()">Book Now</button>
 </div>
 
@@ -640,7 +680,7 @@
     </div>
     <h3>Travel Packages</h3>
     <p>Curated island journeys designed for discovery and relaxation across Bali's most breathtaking landscapes.</p>
-    <a href="#packages" class="link-green">Browse Collection →</a>
+    <a href="package.html" class="link-green">Browse Collection →</a>
   </div>
   <div class="feature-card">
     <div class="feature-icon">
@@ -648,7 +688,7 @@
     </div>
     <h3>Luxury Rentals</h3>
     <p>Private tropical villas featuring world-class amenities, infinity pools and stunning jungle or ocean views.</p>
-    <a href="#" class="link-green" onclick="showToast('Villas page coming soon!'); return false;">View Villas →</a>
+    <a href="rental.html" class="link-green">View Rentals →</a>
   </div>
   <div class="feature-card">
     <div class="feature-icon">
@@ -667,92 +707,34 @@
       <h2>Featured Travel Packages</h2>
       <p>Our most popular destinations chosen by travelers like you.</p>
     </div>
-    <a href="#" class="view-all" onclick="showToast('All packages coming soon!'); return false;">View All Packages →</a>
+    <a href="package.html" class="view-all">View All Packages →</a>
   </div>
 
-  <div class="packages-grid">
-    <div class="pkg-card" onclick="showToast('Ubud Spiritual Retreat — from $1,200 🌿')">
-      <div class="pkg-img">
-        <img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=700&q=80" alt="Ubud Spiritual Retreat" loading="lazy" />
-        <span class="best-seller">Best Seller</span>
-      </div>
-      <div class="pkg-body">
-        <div class="pkg-top">
-          <h3>Ubud Spiritual Retreat</h3>
-          <div class="rating">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            4.9
-          </div>
-        </div>
-        <div class="pkg-loc">
-          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Ubud, Bali &bull; 5 Days
-        </div>
-        <div class="pkg-footer">
-          <div>
-            <div class="price-label">Starts From</div>
-            <div class="price">$1,200</div>
-          </div>
-          <button class="btn-circle">
-            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-        </div>
+  <!-- Cards rendered by JS from localStorage -->
+  <div class="packages-grid" id="featuredGrid">
+    <!-- skeletons shown while JS runs -->
+    <div class="pkg-skeleton" id="skel1">
+      <div class="skel-img"></div>
+      <div class="skel-body">
+        <div class="skel-line short"></div>
+        <div class="skel-line medium"></div>
+        <div class="skel-line short"></div>
       </div>
     </div>
-
-    <div class="pkg-card" onclick="showToast('Uluwatu Coastal Escape — from $850 🌊')">
-      <div class="pkg-img">
-        <img src="https://images.unsplash.com/photo-1573790387438-4da905039392?w=700&q=80" alt="Uluwatu Coastal Escape" loading="lazy" />
-      </div>
-      <div class="pkg-body">
-        <div class="pkg-top">
-          <h3>Uluwatu Coastal Escape</h3>
-          <div class="rating">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            4.8
-          </div>
-        </div>
-        <div class="pkg-loc">
-          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Uluwatu, Bali &bull; 3 Days
-        </div>
-        <div class="pkg-footer">
-          <div>
-            <div class="price-label">Starts From</div>
-            <div class="price">$850</div>
-          </div>
-          <button class="btn-circle">
-            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-        </div>
+    <div class="pkg-skeleton" id="skel2">
+      <div class="skel-img"></div>
+      <div class="skel-body">
+        <div class="skel-line short"></div>
+        <div class="skel-line medium"></div>
+        <div class="skel-line short"></div>
       </div>
     </div>
-
-    <div class="pkg-card" onclick="showToast('Nusa Penida Adventure — from $950 🏝️')">
-      <div class="pkg-img">
-        <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=700&q=80" alt="Nusa Penida Adventure" loading="lazy" />
-      </div>
-      <div class="pkg-body">
-        <div class="pkg-top">
-          <h3>Nusa Penida Adventure</h3>
-          <div class="rating">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            4.7
-          </div>
-        </div>
-        <div class="pkg-loc">
-          <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Nusa Penida &bull; 4 Days
-        </div>
-        <div class="pkg-footer">
-          <div>
-            <div class="price-label">Starts From</div>
-            <div class="price">$950</div>
-          </div>
-          <button class="btn-circle">
-            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-        </div>
+    <div class="pkg-skeleton" id="skel3">
+      <div class="skel-img"></div>
+      <div class="skel-body">
+        <div class="skel-line short"></div>
+        <div class="skel-line medium"></div>
+        <div class="skel-line short"></div>
       </div>
     </div>
   </div>
@@ -762,7 +744,7 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <a href="#" class="logo">
+      <a href="index.html" class="logo">
         <div class="logo-icon">
           <svg viewBox="0 0 24 24"><path d="M12 2C6 8 4 12 12 22C20 12 18 8 12 2Z"/></svg>
         </div>
@@ -813,121 +795,178 @@
   </div>
 
   <div class="footer-bottom">
-    © 2024 Balipath Experiences. All rights reserved. Designed for paradise.
+    © 2026 Balipath Experiences. All rights reserved. Designed for paradise.
   </div>
 </footer>
 
 <div class="toast" id="toast"></div>
 
 <script>
-  /* ── SCROLL PROGRESS ── */
-  const bar = document.getElementById('progress-bar');
-  function updateProgress() {
-    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
-    bar.style.width = Math.min(pct, 100) + '%';
-  }
+/* ═══════════════════════════════════════
+   SHARED DATA — same source as package.html
+   localStorage key: 'bali_packages'
+═══════════════════════════════════════ */
+const DEFAULT_PACKAGES = [
+  { id:1, name:'Crystal Bay Adventure',   location:'Nusa Penida', days:4, price:450,  status:'active', badge:'recommended', img:'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=700&q=80', desc:'Explore the iconic Kelingking Beach, Broken Beach, and swim with Mantas in the crystal clear waters.' },
+  { id:2, name:'Surf & Chill Weekend',     location:'Canggu',     days:3, price:320,  status:'active', badge:'popular',     img:'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=700&q=80', desc:'The ultimate surf retreat with daily lessons, organic meals, and luxury beach club access.' },
+  { id:3, name:'Sacred Heart Wellness',    location:'Ubud',       days:5, price:580,  status:'active', badge:'',            img:'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=700&q=80', desc:'Reconnect with yourself through Balinese yoga, jungle trekking, and ancient water temple rituals.' },
+  { id:4, name:'Sunset Cliff Retreat',     location:'Uluwatu',    days:2, price:150,  status:'active', badge:'',            img:'https://images.unsplash.com/photo-1573790387438-4da905039392?w=700&q=80', desc:'Witness the world-famous Kecak fire dance and explore the hidden limestone caves of Uluwatu.' },
+  { id:5, name:'Luxury Villa Escape',      location:'Seminyak',   days:7, price:1200, status:'active', badge:'',            img:'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=700&q=80', desc:'The ultimate 7-day indulgence in a private villa with pool, personal chef and daily spa treatments.' },
+  { id:6, name:'North Coast Wildlife',     location:'Lovina',     days:3, price:280,  status:'active', badge:'',            img:'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?w=700&q=80', desc:'Head north for sunrise dolphin watching and exploring the mystical Gitgit waterfalls.' },
+];
 
-  /* ── NAV SHADOW ── */
-  const navbar = document.getElementById('navbar');
-  window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 20);
-    updateProgress();
-  }, { passive: true });
+/* ── Read from localStorage (same key as package.html) ── */
+function getPackages() {
+  try {
+    const raw = localStorage.getItem('bali_packages');
+    if (raw) return JSON.parse(raw).filter(p => p.status === 'active');
+  } catch(e) {}
+  return DEFAULT_PACKAGES;
+}
 
-  /* ── HAMBURGER ── */
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  let menuOpen = false;
+/* ── Render only first 3 active packages ── */
+function renderFeatured() {
+  const grid = document.getElementById('featuredGrid');
+  const pkgs = getPackages().slice(0, 3); // ← max 3 cards on homepage
 
-  hamburger.addEventListener('click', () => {
-    menuOpen = !menuOpen;
-    hamburger.classList.toggle('open', menuOpen);
-    mobileMenu.classList.toggle('open', menuOpen);
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  // Remove skeleton placeholders
+  ['skel1','skel2','skel3'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.remove();
   });
 
-  function closeMobileMenu() {
-    menuOpen = false;
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
-  }
+  pkgs.forEach((pkg, idx) => {
+    const daysNum  = pkg.days || parseInt((pkg.duration || '3').split(' ')[0]) || 3;
+    const priceStr = '$' + Number(pkg.price).toLocaleString();
+    const locLabel = (pkg.location || 'Bali').replace(', Bali', '');
+    const imgUrl   = pkg.img || DEFAULT_PACKAGES[0].img;
 
-  /* ── RESPONSIVE NAV VISIBILITY ── */
-  const mq = window.matchMedia('(max-width: 900px)');
-  function handleMQ(e) {
-    const navLinks = document.getElementById('navLinks');
-    const searchBox = document.getElementById('searchBox');
-    const avatarEl  = document.getElementById('avatarEl');
-    [navLinks, searchBox, avatarEl].forEach(el => {
-      if (el) el.style.display = e.matches ? 'none' : '';
-    });
-    hamburger.style.display = e.matches ? 'flex' : 'none';
-    if (!e.matches) closeMobileMenu();
-  }
-  handleMQ(mq);
-  mq.addEventListener('change', handleMQ);
+    let badge = pkg.badge || '';
+    if (!badge && idx === 0) badge = 'recommended';
+    const badgeHtml = badge === 'recommended'
+      ? '<span class="pkg-badge badge-recommended">Recommended</span>'
+      : badge === 'popular'
+      ? '<span class="pkg-badge badge-popular">Popular</span>'
+      : '';
 
-  /* ── SCROLL REVEAL ── */
-  const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
+    const card = document.createElement('div');
+    card.className = 'pkg-card';
+    card.innerHTML = `
+      <div class="pkg-img">
+        <img src="${imgUrl}" alt="${pkg.name}" loading="lazy" />
+        ${badgeHtml}
+        <button class="wishlist-btn" onclick="toggleWishlist(this); event.stopPropagation();">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="pkg-body">
+        <div class="pkg-meta">
+          <div class="pkg-location">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+            ${locLabel}, Bali
+          </div>
+          <div class="pkg-duration">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ${daysNum} Days
+          </div>
+        </div>
+        <h3><a href="package.html">${pkg.name}</a></h3>
+        <p>${pkg.desc || ''}</p>
+        <div class="pkg-footer">
+          <div>
+            <div class="price-label">Starts From</div>
+            <div class="price">${priceStr}</div>
+          </div>
+          <a href="package.html" class="btn-circle" title="See package">
+            <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>`;
 
-  document.querySelectorAll('.feature-card, .pkg-card').forEach(el => revealObs.observe(el));
-
-  /* ── TOAST ── */
-  let toastTimer;
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => t.classList.remove('show'), 3400);
-  }
-
-  /* ── NEWSLETTER ── */
-  function handleNewsletter() {
-    const inp = document.getElementById('emailInput');
-    const val = inp.value.trim();
-    if (!val || !val.includes('@')) { showToast('Please enter a valid email 📧'); return; }
-    showToast('Subscribed successfully! Welcome aboard 🌴');
-    inp.value = '';
-  }
-
-  /* ── CUSTOM CURSOR ── */
-  const dot  = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
-  let rx = 0, ry = 0, mx = 0, my = 0;
-
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    grid.appendChild(card);
+    revealObs.observe(card);
   });
+}
 
-  (function loop() {
-    rx += (mx - rx) * 0.13;
-    ry += (my - ry) * 0.13;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(loop);
-  })();
+/* ── SCROLL PROGRESS ── */
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  bar.style.width = Math.min(pct, 100) + '%';
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
 
-  document.querySelectorAll('a, button, .pkg-card, .feature-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      ring.style.width  = '54px';
-      ring.style.height = '54px';
-      ring.style.borderColor = 'rgba(61,214,107,0.75)';
-    });
-    el.addEventListener('mouseleave', () => {
-      ring.style.width  = '34px';
-      ring.style.height = '34px';
-      ring.style.borderColor = 'rgba(61,214,107,0.55)';
-    });
+/* ── HAMBURGER ── */
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+let menuOpen = false;
+
+hamburger.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  hamburger.classList.toggle('open', menuOpen);
+  mobileMenu.classList.toggle('open', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+});
+function closeMobileMenu() {
+  menuOpen = false;
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ── SCROLL REVEAL ── */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
   });
+}, { threshold: 0.1 });
+document.querySelectorAll('.feature-card').forEach(el => revealObs.observe(el));
+
+/* ── WISHLIST ── */
+function toggleWishlist(btn) {
+  btn.classList.toggle('liked');
+  showToast(btn.classList.contains('liked') ? 'Added to wishlist ♥' : 'Removed from wishlist');
+}
+
+/* ── TOAST ── */
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3400);
+}
+
+/* ── NEWSLETTER ── */
+function handleNewsletter() {
+  const inp = document.getElementById('emailInput');
+  const val = inp.value.trim();
+  if (!val || !val.includes('@')) { showToast('Please enter a valid email 📧'); return; }
+  showToast('Subscribed successfully! Welcome aboard 🌴');
+  inp.value = '';
+}
+
+/* ── CUSTOM CURSOR (desktop only) ── */
+const dot  = document.getElementById('cursorDot');
+const ring = document.getElementById('cursorRing');
+let rx = 0, ry = 0, mx = 0, my = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+});
+(function loop() {
+  rx += (mx - rx) * 0.13; ry += (my - ry) * 0.13;
+  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+  requestAnimationFrame(loop);
+})();
+document.querySelectorAll('a, button, .pkg-card, .feature-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { ring.style.width = '54px'; ring.style.height = '54px'; ring.style.borderColor = 'rgba(61,214,107,0.75)'; });
+  el.addEventListener('mouseleave', () => { ring.style.width = '34px'; ring.style.height = '34px'; ring.style.borderColor = 'rgba(61,214,107,0.55)'; });
+});
+
+/* ── INIT ── */
+renderFeatured();
 </script>
 </body>
 </html>
